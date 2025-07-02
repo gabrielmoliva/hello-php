@@ -7,6 +7,12 @@
             $cpf = !empty($_POST["cpf"]) ? preg_replace('/[^0-9]/', '', $_REQUEST["cpf"]) : null;
             $email = !empty($_REQUEST["email"]) ? $_REQUEST["email"] : null;
 
+            if ($telefone == null || $nome ==null || $data_nascimento == null || $cpf == null) {
+                print "<script>alert('Erro ao inserir no banco: algum campo obrigatório recebeu um valor inválido.');</script>";
+                print "<script>location.href='?page=cadastro'</script>";
+                break;
+            }
+
             $stmt = $conn->prepare("INSERT INTO clientes (nome, telefone, data_nascimento, cpf, email) VALUES (?, ?, ?, ?, ?)");
             $stmt->bind_param("sssss", $nome, $telefone, $data_nascimento, $cpf, $email);
 
@@ -26,6 +32,12 @@
             $email = !empty($_REQUEST["email"]) ? $_REQUEST["email"] : null;
             $id = $_REQUEST["id"];
 
+            if ($telefone == null || $nome ==null || $data_nascimento == null || $cpf == null) {
+                print "<script>alert('Erro ao inserir no banco: algum campo obrigatório recebeu um valor inválido.');</script>";
+                print "<script>location.href='?page=cadastro'</script>";
+                break;
+            }
+
             $stmt = $conn->prepare("UPDATE clientes SET nome = ?, telefone = ?, data_nascimento = ?, cpf = ?, email = ? WHERE id = ?");
             $stmt->bind_param("sssssi", $nome, $telefone, $data_nascimento, $cpf, $email, $id);
 
@@ -33,8 +45,10 @@
                 print "<script>alert ('Cliente editado com sucesso')</script>";
                 print "<script>location.href='?page=listar'</script>";
             } else {
-                print "<script>alert('Erro ao editar cliente: " . $stmt->error . "');</script>";
-                print "<script>location.href='?page=cadastro'</script>";
+                print "<script>window.onload = function() {
+                    alert('Erro ao editar cliente: " . $stmt->error . "');
+                    location.href='?page=cadastro';
+                    }</script>";
             }
             break;
         case "excluir":
@@ -47,8 +61,10 @@
                 print "<script>alert ('Cliente excluído com sucesso')</script>";
                 print "<script>location.href='?page=listar'</script>";
             } else {
-                print "<script>alert('Erro ao excluir cliente: " . $stmt->error . "');</script>";
-                print "<script>location.href='?page=cadastro'</script>";
+                print "<script>window.onload = function() {
+                    alert('Erro ao excluir cliente: " . $stmt->error . "');
+                    location.href='?page=cadastro';
+                    }</script>";
             }
             break;
     }
