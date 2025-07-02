@@ -19,6 +19,23 @@
             }
             break;
         case "editar":
+            $nome = $_REQUEST["nome"];
+            $telefone = preg_replace('/[^0-9]/', '', $_REQUEST["telefone"]);
+            $data_nascimento = $_REQUEST["data_nascimento"];
+            $cpf = !empty($_POST["cpf"]) ? preg_replace('/[^0-9]/', '', $_REQUEST["cpf"]) : null;
+            $email = !empty($_REQUEST["email"]) ? $_REQUEST["email"] : null;
+            $id = $_REQUEST["id"];
+
+            $stmt = $conn->prepare("UPDATE clientes SET nome = ?, telefone = ?, data_nascimento = ?, cpf = ?, email = ? WHERE id = ?");
+            $stmt->bind_param("sssssi", $nome, $telefone, $data_nascimento, $cpf, $email, $id);
+
+            if ($stmt->execute()) {
+                print "<script>alert ('Cliente editado com sucesso')</script>";
+                print "<script>location.href='?page=listar'</script>";
+            } else {
+                print "<script>alert('Erro ao editar cliente: " . $stmt->error . "');</script>";
+                print "<script>location.href='?page=cadastro'</script>";
+            }
             break;
         case "excluir":
             break;
