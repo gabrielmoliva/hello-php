@@ -41,9 +41,8 @@
       <div class="col mt-5">
         <?php
         include("config.php");
-        include("cliente_model.php");
 
-        switch ($_REQUEST["page"]) {
+        switch (@$_REQUEST["page"]) {
           case "listar":
             include("listar_clientes.php");
             break;
@@ -54,14 +53,13 @@
             include("editar_cliente.php");
             break;
           case "excluir":
-            include("excluir_cliente");
+            include("excluir_cliente.php");
             break;
           case "service":
             include("cliente_service.php");
             break;
           default:
-            // placeholder
-            echo "hello";
+            include("listar_clientes.php");
             break;
         }
         ?>
@@ -79,18 +77,13 @@
 <?php
   include("config.php");
 
-  // Optei por tornar o telefone a chave primária da tabela para simplificar o case, mas,
-  // em caso de um projeto maior, optaria por um campo de id auto incremental 
-  // e deixaria o telefone como NOT NULL UNIQUE
   $sql = "CREATE TABLE IF NOT EXISTS clientes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
-    telefone VARCHAR(20) PRIMARY KEY,
+    telefone VARCHAR(20) NOT NULL UNIQUE,
     data_nascimento DATE NOT NULL,
     cpf VARCHAR(14) DEFAULT NULL,
     email VARCHAR(100) DEFAULT NULL
   )";
-
-  if ($conn->query($sql)) {
-    echo "foi";
-  }
+  $conn->query($sql);
 ?>
