@@ -38,8 +38,15 @@
             }
             break;
         case "excluir":
-            break;
-        default:
-            echo "dadadadad";
+            $sql = "DELETE FROM clientes WHERE id=" . $_REQUEST["id"];
+            $stmt = $conn->prepare($sql);
+
+            if ($stmt->execute()) {
+                print "<script>alert ('Cliente excluído com sucesso')</script>";
+                print "<script>location.href='?page=listar'</script>";
+            } else {
+                print "<script>alert('Erro ao excluir cliente: " . $stmt->error . "');</script>";
+                print "<script>location.href='?page=cadastro'</script>";
+            }
             break;
     }

@@ -23,12 +23,12 @@
         print "<td>".$telefone."</td>";
         print "<td>".$row->data_nascimento."</td>";
         print "<td>".$cpf."</td>";
-        print "<td>".$row->email."</td>";
+        print "<td><a href='mailto:$row->email'>$row->email</a></td>";
         print "<td>
             <button onclick=\"location.href='?page=editar&id=".$row->id."';\" class='btn btn-success'>
                 <i class='fa-solid fa-user-pen'></i>
             </button>
-            <button onclick=\"location.href='?page=excluir&id=".$row->id."';\" class='btn btn-danger'>
+            <button onclick=\"if(confirm('Tem certeza que deseja excluir o usuário $row->id?')){location.href='?page=service&acao=excluir&id=".$row->id."';}else {false;}\" class='btn btn-danger'>
                 <i class='fa-solid fa-trash'></i>
             </button>
         </td>";
