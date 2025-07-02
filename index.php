@@ -69,7 +69,9 @@
 
 <?php
   include("config.php");
-
+  
+  // Fiquei em dúvida se deveria deixar o cpf como UNIQUE, já que na prática, esse dado não se repete entre pessoas diferentes
+  // Por simplicidade, não deixei como UNIQUE, pois não era uma das regras do Case
   $sql = "CREATE TABLE IF NOT EXISTS clientes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
