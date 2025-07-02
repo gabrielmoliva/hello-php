@@ -16,13 +16,10 @@
             $stmt = $conn->prepare("INSERT INTO clientes (nome, telefone, data_nascimento, cpf, email) VALUES (?, ?, ?, ?, ?)");
             $stmt->bind_param("sssss", $nome, $telefone, $data_nascimento, $cpf, $email);
 
-            if ($stmt->execute()) {
-                print "<script>alert ('Cadastro realizado com sucesso')</script>";
-                print "<script>location.href='?page=listar'</script>";
-            } else {
-                print "<script>alert('Erro ao inserir no banco: " . $stmt->error . "');</script>";
-                print "<script>location.href='?page=cadastro'</script>";
-            }
+            $stmt->execute();
+            print "<script>alert ('Cadastro realizado com sucesso')</script>";
+            print "<script>location.href='?page=listar'</script>";
+            
             break;
         case "editar":
             $nome = $_REQUEST["nome"];
@@ -41,15 +38,10 @@
             $stmt = $conn->prepare("UPDATE clientes SET nome = ?, telefone = ?, data_nascimento = ?, cpf = ?, email = ? WHERE id = ?");
             $stmt->bind_param("sssssi", $nome, $telefone, $data_nascimento, $cpf, $email, $id);
 
-            if ($stmt->execute()) {
-                print "<script>alert ('Cliente editado com sucesso')</script>";
-                print "<script>location.href='?page=listar'</script>";
-            } else {
-                print "<script>window.onload = function() {
-                    alert('Erro ao editar cliente: " . $stmt->error . "');
-                    location.href='?page=cadastro';
-                    }</script>";
-            }
+            $stmt->execute();
+            print "<script>alert ('Cliente editado com sucesso')</script>";
+            print "<script>location.href='?page=listar'</script>";
+            
             break;
         case "excluir":
             $id = $_REQUEST["id"];
@@ -57,14 +49,9 @@
             $stmt = $conn->prepare("DELETE FROM clientes WHERE id = ?");
             $stmt->bind_param("i", $id);
 
-            if ($stmt->execute()) {
-                print "<script>alert ('Cliente excluído com sucesso')</script>";
-                print "<script>location.href='?page=listar'</script>";
-            } else {
-                print "<script>window.onload = function() {
-                    alert('Erro ao excluir cliente: " . $stmt->error . "');
-                    location.href='?page=cadastro';
-                    }</script>";
-            }
+            $stmt->execute();
+            print "<script>alert ('Cliente excluído com sucesso')</script>";
+            print "<script>location.href='?page=listar'</script>";
+            
             break;
     }
