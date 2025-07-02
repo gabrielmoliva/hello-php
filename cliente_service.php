@@ -7,7 +7,7 @@
             $cpf = !empty($_POST["cpf"]) ? preg_replace('/[^0-9]/', '', $_REQUEST["cpf"]) : null;
             $email = !empty($_REQUEST["email"]) ? $_REQUEST["email"] : null;
 
-            if ($telefone == null || $nome ==null || $data_nascimento == null || $cpf == null) {
+            if ($telefone == null || $nome ==null || $data_nascimento == null) {
                 print "<script>alert('Erro ao inserir no banco: algum campo obrigatório recebeu um valor inválido.');</script>";
                 print "<script>location.href='?page=cadastro'</script>";
                 break;
@@ -32,7 +32,7 @@
             $email = !empty($_REQUEST["email"]) ? $_REQUEST["email"] : null;
             $id = $_REQUEST["id"];
 
-            if ($telefone == null || $nome ==null || $data_nascimento == null || $cpf == null) {
+            if ($telefone == null || $nome ==null || $data_nascimento == null) {
                 print "<script>alert('Erro ao inserir no banco: algum campo obrigatório recebeu um valor inválido.');</script>";
                 print "<script>location.href='?page=cadastro'</script>";
                 break;
