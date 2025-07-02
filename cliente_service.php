@@ -38,8 +38,10 @@
             }
             break;
         case "excluir":
-            $sql = "DELETE FROM clientes WHERE id=" . $_REQUEST["id"];
-            $stmt = $conn->prepare($sql);
+            $id = $_REQUEST["id"];
+
+            $stmt = $conn->prepare("DELETE FROM clientes WHERE id = ?");
+            $stmt->bind_param("i", $id);
 
             if ($stmt->execute()) {
                 print "<script>alert ('Cliente excluído com sucesso')</script>";
