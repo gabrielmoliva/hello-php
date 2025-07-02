@@ -25,12 +25,6 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="?page=cadastrar">Cadastrar</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="?page=editar">Editar</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="?page=excluir">Excluir</a>
-          </li>
         </ul>
       </div>
     </div>
@@ -52,9 +46,6 @@
           case "editar":
             include("editar_cliente.php");
             break;
-          case "excluir":
-            include("excluir_cliente.php");
-            break;
           case "service":
             include("cliente_service.php");
             break;
@@ -70,6 +61,8 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
     crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </body>
 
 </html>
